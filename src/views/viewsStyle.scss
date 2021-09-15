@@ -1,5 +1,20 @@
-.home-page {
-  &__title {
-    text-align: center;
+.title {
+  text-align: center;
+}
+
+.registration {
+  width: 320px;
+  margin: 0 auto;
+
+  &__input {
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  &__field {
+    width: 320px;
+  }
+
+  &__button {
   }
 }

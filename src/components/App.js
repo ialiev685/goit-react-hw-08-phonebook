@@ -5,17 +5,22 @@ import Section from "./Section";
 import Filter from "./Filter";
 import "./App.scss";
 import { Route, Switch } from "react-router-dom";
-import { HomeView } from "views";
+import { HomeView, RigisterView } from "views";
+import { Navigation } from "./Navigation";
 
 const App = () => {
   return (
     <Section>
+      <Navigation />
       <Switch>
-        <Route patch="/">
+        <Route path="/" exact>
           <HomeView />
         </Route>
+        <Route path="/register">
+          <RigisterView />
+        </Route>
 
-        <Route patch="/contacts">
+        <Route path="/contacts">
           <h1 className="caption">Phonebook</h1>
           <ContactForm />
 
