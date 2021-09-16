@@ -1,12 +1,26 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import * as API from "../../services/ApiContacts";
+
+const axios = require("axios");
+
+axios.defaults.baseURL = "https://connections-api.herokuapp.com";
+
+const token = {
+  set(token) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  },
+};
 
 export const fetchRegisterUser = createAsyncThunk(
   "user/register",
-  async (user) => {
+  async (user, { rejectWithValue }) => {
     try {
-      const data = await API.fetchRegisterUser(user);
+      const { data } = await axios.post("/users/signup", user);
+      token.set(data.token);
       console.log(data);
-    } catch (error) {}
+      return data;
+    } catch (error) {
+      console.log(rejectWithValue(error));
+      return rejectWithValue(error.message);
+    }
   }
 );

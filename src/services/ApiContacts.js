@@ -6,12 +6,6 @@ const API = axios.create({
 
 //axios.defaults.baseURL
 
-const token = {
-  set(token) {
-    API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  },
-};
-
 export const fetchRegisterUser = async (user) => {
   console.log(user);
   return API.post("/users/signup", user);
