@@ -14,3 +14,11 @@ body {
   text-decoration: none;
   color: rgb(41, 40, 40);
 }
+
+.link:not(:last-child) {
+  margin-right: 20px;
+}
+
+.active {
+  color: rgb(206, 2, 2);
+}

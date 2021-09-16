@@ -35,16 +35,19 @@ export const RigisterView = () => {
     const user = { name, email, password };
 
     dispatch(fetchRegisterUser(user));
+    setName("");
+    setEmail("");
+    setPassword("");
   };
 
   return (
-    <div className="registration">
+    <div className="form-user">
       <form onSubmit={handleSubmit}>
-        <label className="registration__input">
+        <label className="form-user__input">
           Name
           <input
             autoComplete="off"
-            className="registration__field"
+            className="form-user__field"
             type="text"
             value={name}
             name="name"
@@ -52,11 +55,11 @@ export const RigisterView = () => {
             required
           />
         </label>
-        <label className="registration__input">
+        <label className="form-user__input">
           Email
           <input
             autoComplete="off"
-            className="registration__field"
+            className="form-user__field"
             type="email"
             value={email}
             name="email"
@@ -65,11 +68,11 @@ export const RigisterView = () => {
           />
         </label>
 
-        <label className="registration__input">
+        <label className="form-user__input">
           Password
           <input
             autoComplete="off"
-            className="registration__field"
+            className="form-user__field"
             type="password"
             value={password}
             name="password"
@@ -77,7 +80,7 @@ export const RigisterView = () => {
             required
           />
         </label>
-        <button type="submit" className="registration__button">
+        <button type="submit" className="form-user__button">
           register
         </button>
       </form>

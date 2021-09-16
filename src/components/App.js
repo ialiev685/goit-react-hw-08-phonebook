@@ -5,7 +5,7 @@ import Section from "./Section";
 import Filter from "./Filter";
 import "./App.scss";
 import { Route, Switch } from "react-router-dom";
-import { HomeView, RigisterView } from "views";
+import { HomeView, RigisterView, LoginView } from "views";
 import { Navigation } from "./Navigation";
 
 const App = () => {
@@ -13,11 +13,14 @@ const App = () => {
     <Section>
       <Navigation />
       <Switch>
-        <Route path="/" exact>
+        <Route exact path="/">
           <HomeView />
         </Route>
-        <Route path="/register">
+        <Route exact path="/register">
           <RigisterView />
+        </Route>
+        <Route exact path="/login">
+          <LoginView />
         </Route>
 
         <Route path="/contacts">

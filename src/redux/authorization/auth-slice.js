@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchRegisterUser } from "./auth-operations";
+import { fetchRegisterUser, fetchLogInUser } from "./auth-operations";
 
 const initialState = {
   user: { name: null, email: null },
@@ -18,6 +18,11 @@ const authSlice = createSlice({
     },
     [fetchRegisterUser.rejected](state, action) {
       state.error = action.payload;
+    },
+
+    [fetchLogInUser.fulfilled](state, action) {
+      state.user = action.payload.user;
+      state.islogged = true;
     },
   },
 });

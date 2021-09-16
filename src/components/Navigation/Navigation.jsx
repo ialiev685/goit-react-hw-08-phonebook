@@ -1,8 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Authorization } from "components/Authorization";
+import { useSelector } from "react-redux";
+import { getIsLogged } from "redux/authorization";
 import "./Navigation.scss";
 
 export const Navigation = () => {
+  const isLogged = useSelector(getIsLogged);
+  console.log(isLogged);
   return (
     <nav className="navigation">
       <NavLink
@@ -20,7 +25,8 @@ export const Navigation = () => {
         Contacts
       </NavLink>
       <div className="navigation__authorization">
-        <NavLink
+        {isLogged ? "залогился" : <Authorization />}
+        {/* <NavLink
           activeClassName="active"
           className="link navigation__link"
           to="/login"
@@ -33,7 +39,7 @@ export const Navigation = () => {
           to="/register"
         >
           Register
-        </NavLink>
+        </NavLink> */}
       </div>
     </nav>
   );
