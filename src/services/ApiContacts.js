@@ -1,17 +1,72 @@
 const axios = require("axios");
 
-const API = axios.create({
-  baseURL: "https://connections-api.herokuapp.com",
-});
+// const API = axios.create({
+//   baseURL: "https://connections-api.herokuapp.com",
+// });
 
-export const fetchContacts = async () => {
-  return await API.get("/contacts");
+axios.defaults.baseURL = "https://connections-api.herokuapp.com";
+
+const token = {
+  set(token) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  },
+  unset() {
+    axios.defaults.headers.common["Authorization"] = "";
+  },
+};
+
+//запросы контактов
+
+export const fetchContacts = async (localStorage) => {
+  token.set(localStorage);
+  return await axios.get("/contacts");
 };
 
 export const fetchCreateContact = async (item) => {
-  return await API.post("/contacts", item);
+  return await axios.post("/contacts", item);
 };
 
 export const fetchDeleteContact = async (id) => {
-  return await API.delete(`/contacts/${id}`);
+  return await axios.delete(`/contacts/${id}`);
 };
+
+//запросы пользователя
+
+export const fetchRegisterUser = async (user) => {
+  const { data } = await axios.post("/users/signup", user);
+  token.set(data.token);
+  return data;
+};
+
+export const fetchLogInUser = async (user) => {
+  const { data } = await axios.post("/users/login", user);
+
+  token.set(data.token);
+
+  return data;
+};
+
+export const fetchLogOut = async () => {
+  await axios.post("/users/logout");
+  token.unset();
+};
+
+export const fetchCurrentUser = async (localStorage) => {
+  token.set(localStorage);
+
+  const { data } = await axios.get("/users/current");
+
+  return data;
+};
+
+const API = {
+  fetchContacts,
+  fetchCreateContact,
+  fetchDeleteContact,
+  fetchRegisterUser,
+  fetchLogInUser,
+  fetchLogOut,
+  fetchCurrentUser,
+};
+
+export default API;

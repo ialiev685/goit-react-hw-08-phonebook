@@ -1,15 +1,21 @@
-import * as API from "../../services/ApiContacts";
+import * as API from "services/ApiContacts";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchContacts = createAsyncThunk(
   "contacts/fetchContacts",
-  async (_, { rejectWithValue }) => {
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const localStorage = state.authorization.token;
+
+    if (localStorage === null) {
+      return thunkAPI.rejectWithValue("Have not token");
+    }
     try {
-      const contacts = await API.fetchContacts();
-      console.log(contacts);
-      // return contacts.data;
+      const contacts = await API.fetchContacts(localStorage);
+
+      return contacts.data;
     } catch (err) {
-      return rejectWithValue(err.message);
+      return thunkAPI.rejectWithValue(err.message);
     }
   }
 );
@@ -20,7 +26,7 @@ export const fetchCreateContact = createAsyncThunk(
     try {
       const contacts = await API.fetchCreateContact(item);
       console.log(contacts);
-      // return contacts.data;
+      return contacts.data;
     } catch (err) {
       return rejectWithValue(err.message);
     }

@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import API from "services";
 
 const axios = require("axios");
 
@@ -64,13 +65,13 @@ export const fetchCurrentUser = createAsyncThunk(
       return thunkAPI.rejectWithValue("Have not token");
     }
 
-    token.set(localStorage);
+    // token.set(localStorage);
     try {
-      const { data } = await axios.get("/users/current");
-
+      // const { data } = await axios.get("/users/current");
+      const data = await API.fetchCurrentUser(localStorage);
       return data;
     } catch (error) {
-      thunkAPI.rejectWithValue("error.message");
+      thunkAPI.rejectWithValue(error.message);
     }
   }
 );
