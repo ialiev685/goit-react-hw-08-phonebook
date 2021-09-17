@@ -1,3 +1,8 @@
-export { fetchRegisterUser, fetchLogInUser } from "./auth-operations";
+export {
+  fetchRegisterUser,
+  fetchLogInUser,
+  fetchLogOut,
+  fetchCurrentUser,
+} from "./auth-operations";
 export { default as authReducer } from "./auth-slice";
-export { getIsLogged } from "./auth-selector";
+export { getIsLogged, getUserName } from "./auth-selector";

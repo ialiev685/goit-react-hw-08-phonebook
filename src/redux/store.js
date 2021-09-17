@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import { authReducer } from "./authorization";
+import contacts from "redux/phonebook";
 
 import {
   persistStore,
@@ -25,6 +26,7 @@ const persistedAuthorization = persistReducer(persistConfig, authReducer);
 export const store = configureStore({
   reducer: {
     authorization: persistedAuthorization,
+    contacts,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

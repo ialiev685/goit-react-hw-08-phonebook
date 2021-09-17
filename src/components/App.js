@@ -1,36 +1,40 @@
 import React from "react";
-import ContactForm from "./ContactForm";
-import ContactsList from "./ContactsList";
+
 import Section from "./Section";
-import Filter from "./Filter";
+import { ContactsView } from "views";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import "./App.scss";
 import { Route, Switch } from "react-router-dom";
 import { HomeView, RigisterView, LoginView } from "views";
 import { Navigation } from "./Navigation";
+import { fetchCurrentUser } from "redux/authorization";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
+
   return (
     <Section>
       <Navigation />
       <Switch>
-        <Route exact path="/">
-          <HomeView />
-        </Route>
-        <Route exact path="/register">
+        <Route path="/register">
           <RigisterView />
         </Route>
-        <Route exact path="/login">
+
+        <Route path="/login">
           <LoginView />
         </Route>
 
         <Route path="/contacts">
-          <h1 className="caption">Phonebook</h1>
-          <ContactForm />
+          <ContactsView />
+        </Route>
 
-          <h2 className="title">Contacts</h2>
-          <Filter />
-
-          <ContactsList />
+        <Route exact path="/">
+          <HomeView />
         </Route>
       </Switch>
     </Section>

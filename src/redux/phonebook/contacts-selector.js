@@ -5,16 +5,6 @@ export const getFilter = (state) => state.contacts.filter;
 export const getIsLoader = (state) => state.contacts.isLoader;
 export const getError = (state) => state.contacts.error;
 
-// export const getFilterContacts = (state) => {
-//   const items = getItems(state);
-//   const filter = getFilter(state);
-//   const normalizedFilter = filter.toLowerCase();
-
-//   return items.filter(({ name }) =>
-//     name.toLowerCase().includes(normalizedFilter)
-//   );
-// };
-
 export const getFilterContacts = createSelector(
   [getItems, getFilter],
   (items, filter) => {

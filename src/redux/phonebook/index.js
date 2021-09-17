@@ -10,3 +10,5 @@ export {
   fetchDeleteContact,
 } from "./contacts-operations";
 export { getFilterItems } from "./contacts-action";
+
+export { default } from "./contacts-reducer";

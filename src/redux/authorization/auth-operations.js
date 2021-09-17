@@ -32,11 +32,45 @@ export const fetchLogInUser = createAsyncThunk(
   async (user, { rejectWithValue }) => {
     try {
       const { data } = await axios.post("/users/login", user);
+
       token.set(data.token);
 
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchLogOut = createAsyncThunk(
+  "user/logout",
+  async (_, { rejectWithValue }) => {
+    try {
+      await axios.post("/users/logout");
+      token.unset();
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchCurrentUser = createAsyncThunk(
+  "user/refresh",
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const localStorage = state.authorization.token;
+
+    if (localStorage === null) {
+      return thunkAPI.rejectWithValue("Have not token");
+    }
+
+    token.set(localStorage);
+    try {
+      const { data } = await axios.get("/users/current");
+
+      return data;
+    } catch (error) {
+      thunkAPI.rejectWithValue("error.message");
     }
   }
 );

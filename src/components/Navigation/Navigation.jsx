@@ -3,43 +3,31 @@ import { NavLink } from "react-router-dom";
 import { Authorization } from "components/Authorization";
 import { useSelector } from "react-redux";
 import { getIsLogged } from "redux/authorization";
+import { UserMenu } from "components/UserMenu";
 import "./Navigation.scss";
 
 export const Navigation = () => {
   const isLogged = useSelector(getIsLogged);
-  console.log(isLogged);
+
   return (
     <nav className="navigation">
       <NavLink
-        activeClassName="active"
         className="link navigation__link"
+        activeClassName="active"
         to="/"
       >
         Home
       </NavLink>
       <NavLink
+        className="link navigation__link"
         activeClassName="active"
-        className="link navigation__link "
         to="/contacts"
       >
         Contacts
       </NavLink>
+
       <div className="navigation__authorization">
-        {isLogged ? "залогился" : <Authorization />}
-        {/* <NavLink
-          activeClassName="active"
-          className="link navigation__link"
-          to="/login"
-        >
-          Login
-        </NavLink>
-        <NavLink
-          activeClassName="active"
-          className="link navigation__link"
-          to="/register"
-        >
-          Register
-        </NavLink> */}
+        {isLogged ? <UserMenu /> : <Authorization />}
       </div>
     </nav>
   );

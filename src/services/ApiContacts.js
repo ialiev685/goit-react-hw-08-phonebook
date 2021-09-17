@@ -4,13 +4,6 @@ const API = axios.create({
   baseURL: "https://connections-api.herokuapp.com",
 });
 
-//axios.defaults.baseURL
-
-export const fetchRegisterUser = async (user) => {
-  console.log(user);
-  return API.post("/users/signup", user);
-};
-
 export const fetchContacts = async () => {
   return await API.get("/contacts");
 };

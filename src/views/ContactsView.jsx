@@ -1,5 +1,19 @@
 import React from "react";
+import "./viewsStyle.scss";
+import ContactForm from "components/ContactForm";
+import ContactsList from "components/ContactsList";
+import Filter from "components/Filter";
 
 export const ContactsView = () => {
-  return <div></div>;
+  return (
+    <div className="contacts">
+      <h1 className="caption">Phonebook</h1>
+      <ContactForm />
+
+      <h2 className="title">Contacts</h2>
+      <Filter />
+
+      <ContactsList />
+    </div>
+  );
 };
