@@ -1,4 +1,4 @@
-import * as API from "services/ApiContacts";
+import * as API from "services/ApiPhoneBook";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchContacts = createAsyncThunk(

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { fetchLogInUser } from "redux/authorization";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLogInUser, getError } from "redux/authorization";
 import "./viewsStyle.scss";
 
 export const LoginView = () => {
@@ -9,6 +9,7 @@ export const LoginView = () => {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
+  const error = useSelector(getError);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,9 +66,10 @@ export const LoginView = () => {
           />
         </label>
         <button type="submit" className="form-user__button">
-          register
+          enter
         </button>
       </form>
+      {error && <p className="form-user__error">{error}</p>}
     </div>
   );
 };

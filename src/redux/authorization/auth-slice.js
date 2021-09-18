@@ -10,6 +10,7 @@ const initialState = {
   user: { name: null, email: null },
   token: null,
   islogged: false,
+  isfetchingCurrentUser: false,
   error: null,
 };
 
@@ -41,10 +42,18 @@ const authSlice = createSlice({
     [fetchLogOut.rejected](state, action) {
       state.error = action.payload;
     },
+    [fetchCurrentUser.pending](state) {
+      state.isfetchingCurrentUser = true;
+    },
 
     [fetchCurrentUser.fulfilled](state, action) {
       state.user = action.payload;
+      state.isfetchingCurrentUser = false;
       state.islogged = true;
+    },
+    [fetchCurrentUser.rejected](state, action) {
+      state.isfetchingCurrentUser = false;
+      state.error = action.payload;
     },
   },
 });

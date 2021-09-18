@@ -11,20 +11,14 @@ export const Navigation = () => {
 
   return (
     <nav className="navigation">
-      <NavLink
-        className="link navigation__link"
-        activeClassName="active"
-        to="/"
-      >
+      <NavLink className="link" activeClassName="active" exact to="/">
         Home
       </NavLink>
-      <NavLink
-        className="link navigation__link"
-        activeClassName="active"
-        to="/contacts"
-      >
-        Contacts
-      </NavLink>
+      {isLogged && (
+        <NavLink className="link" activeClassName="active" to="/contacts">
+          Contacts
+        </NavLink>
+      )}
 
       <div className="navigation__authorization">
         {isLogged ? <UserMenu /> : <Authorization />}

@@ -1,1 +1,1 @@
-export { default } from "./ApiContacts";
+export { default } from "./ApiPhoneBook";

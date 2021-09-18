@@ -15,7 +15,7 @@ const token = {
   },
 };
 
-//запросы контактов
+//запросы по контактам
 
 export const fetchContacts = async (localStorage) => {
   token.set(localStorage);
@@ -30,7 +30,7 @@ export const fetchDeleteContact = async (id) => {
   return await axios.delete(`/contacts/${id}`);
 };
 
-//запросы пользователя
+//запросы авторизации
 
 export const fetchRegisterUser = async (user) => {
   const { data } = await axios.post("/users/signup", user);

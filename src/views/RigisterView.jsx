@@ -1,8 +1,8 @@
 import React from "react";
 import "./viewsStyle.scss";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { fetchRegisterUser } from "redux/authorization";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRegisterUser, getError } from "redux/authorization";
 
 export const RigisterView = () => {
   const [name, setName] = useState("");
@@ -10,6 +10,7 @@ export const RigisterView = () => {
   const [email, setEmail] = useState("");
 
   const dispatch = useDispatch();
+  const error = useSelector(getError);
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -84,6 +85,7 @@ export const RigisterView = () => {
           register
         </button>
       </form>
+      {error && <p className="form-user__error">{error}</p>}
     </div>
   );
 };

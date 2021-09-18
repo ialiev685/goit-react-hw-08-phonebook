@@ -1,26 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import API from "services";
 
-const axios = require("axios");
-
-axios.defaults.baseURL = "https://connections-api.herokuapp.com";
-
-const token = {
-  set(token) {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  },
-  unset() {
-    axios.defaults.headers.common["Authorization"] = "";
-  },
-};
-
 export const fetchRegisterUser = createAsyncThunk(
   "user/register",
   async (user, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post("/users/signup", user);
-      token.set(data.token);
-
+      const data = await API.fetchRegisterUser(user);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -32,9 +17,7 @@ export const fetchLogInUser = createAsyncThunk(
   "user/login",
   async (user, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post("/users/login", user);
-
-      token.set(data.token);
+      const data = await API.fetchLogInUser(user);
 
       return data;
     } catch (error) {
@@ -47,8 +30,7 @@ export const fetchLogOut = createAsyncThunk(
   "user/logout",
   async (_, { rejectWithValue }) => {
     try {
-      await axios.post("/users/logout");
-      token.unset();
+      await API.fetchLogOut();
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -62,12 +44,10 @@ export const fetchCurrentUser = createAsyncThunk(
     const localStorage = state.authorization.token;
 
     if (localStorage === null) {
-      return thunkAPI.rejectWithValue("Have not token");
+      return thunkAPI.rejectWithValue();
     }
 
-    // token.set(localStorage);
     try {
-      // const { data } = await axios.get("/users/current");
       const data = await API.fetchCurrentUser(localStorage);
       return data;
     } catch (error) {

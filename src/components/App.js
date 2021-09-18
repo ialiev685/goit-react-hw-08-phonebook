@@ -3,42 +3,47 @@ import React from "react";
 import Section from "./Section";
 import { ContactsView } from "views";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.scss";
-import { Route, Switch } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import { HomeView, RigisterView, LoginView } from "views";
 import { Navigation } from "./Navigation";
-import { fetchCurrentUser } from "redux/authorization";
+import { fetchCurrentUser, getIsFetchingCurrent } from "redux/authorization";
+import { PrivateRoute } from "./PrivateRoute";
+import { PublicRoute } from "./PublicRoute";
+import { Spinner } from "./Spinner";
 
 const App = () => {
   const dispatch = useDispatch();
+  const isFetchingCurrentUser = useSelector(getIsFetchingCurrent);
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);
 
-  return (
-    <Section>
+  const murkup = (
+    <>
       <Navigation />
       <Switch>
-        <Route path="/register">
-          <RigisterView />
-        </Route>
-
-        <Route path="/login">
-          <LoginView />
-        </Route>
-
-        <Route path="/contacts">
-          <ContactsView />
-        </Route>
-
-        <Route exact path="/">
+        <PublicRoute exact path="/">
           <HomeView />
-        </Route>
+        </PublicRoute>
+        <PublicRoute path="/register" restricted>
+          <RigisterView />
+        </PublicRoute>
+
+        <PublicRoute path="/login" redirect="/contacts" restricted>
+          <LoginView />
+        </PublicRoute>
+
+        <PrivateRoute path="/contacts" redirect="/login">
+          <ContactsView />
+        </PrivateRoute>
       </Switch>
-    </Section>
+    </>
   );
+
+  return <Section>{isFetchingCurrentUser ? <Spinner /> : murkup}</Section>;
 };
 
 export default App;
