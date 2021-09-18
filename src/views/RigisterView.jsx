@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRegisterUser, getError } from "redux/authorization";
 
-export const RigisterView = () => {
+const RigisterView = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -89,3 +89,4 @@ export const RigisterView = () => {
     </div>
   );
 };
+export default RigisterView;

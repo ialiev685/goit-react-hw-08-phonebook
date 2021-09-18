@@ -1,6 +1,12 @@
+.header {
+  background-color: rgb(92, 127, 241);
+}
+
 .navigation {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
+  height: 60px;
 
   &__authorization {
     margin-left: auto;

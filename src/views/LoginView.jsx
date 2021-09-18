@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchLogInUser, getError } from "redux/authorization";
 import "./viewsStyle.scss";
 
-export const LoginView = () => {
+const LoginView = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -73,3 +73,5 @@ export const LoginView = () => {
     </div>
   );
 };
+
+export default LoginView;
