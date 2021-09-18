@@ -1,23 +1,28 @@
-import "./ContactItem.scss";
+// import "./ContactItem.scss";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { fetchDeleteContact } from "redux/phonebook/contacts-operations";
+import { ListGroup, Button } from "react-bootstrap";
 
 const ContactItem = ({ name, number, id }) => {
   const dispatch = useDispatch();
 
   return (
-    <li className="contacts-list__item">
+    <ListGroup.Item className="contacts-list__item">
       <span>
         {name}: {number}
       </span>
-      <input
-        className="contacts-list__button"
+      <Button
+        style={{ marginLeft: 20 }}
+        variant="danger"
+        size="sm"
+        className="contacts-list__button "
         type="button"
-        value="delete"
         onClick={() => dispatch(fetchDeleteContact(id))}
-      />
-    </li>
+      >
+        delete
+      </Button>
+    </ListGroup.Item>
   );
 };
 

@@ -6,11 +6,11 @@ import Filter from "components/Filter";
 
 const ContactsView = () => {
   return (
-    <div className="contacts">
+    <div className="contacts mt-3">
       <h1 className="caption">Phonebook</h1>
       <ContactForm />
 
-      <h2 className="title">Contacts</h2>
+      <h2 className="title mt-3">Contacts</h2>
       <Filter />
 
       <ContactsList />

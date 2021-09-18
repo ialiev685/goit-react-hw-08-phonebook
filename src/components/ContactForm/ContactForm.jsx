@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "./ContactForm.scss";
-
+// import "./ContactForm.scss";
+import { Form, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getFilterContacts, fetchCreateContact } from "redux/phonebook";
 import { v4 as uuidv4 } from "uuid";
@@ -55,10 +55,10 @@ const ContactForm = () => {
 
   return (
     <div className="form-contacts">
-      <form onSubmit={handleSubmit}>
-        <label className="form-contacts__input">
-          Name:
-          <input
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicText">
+          <Form.Label className="form-contacts__input">Name:</Form.Label>
+          <Form.Control
             className="form-contacts__text"
             type="text"
             name="name"
@@ -69,10 +69,10 @@ const ContactForm = () => {
             value={name}
             autoComplete="off"
           />
-        </label>
-        <label className="form-contacts__input">
-          Number:
-          <input
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicTel">
+          <Form.Label className="form-contacts__input">Number:</Form.Label>
+          <Form.Control
             className="form-contacts__text"
             type="tel"
             name="number"
@@ -83,11 +83,16 @@ const ContactForm = () => {
             value={number}
             autoComplete="off"
           />
-        </label>
-        <button type="submit" className="form-contacts__button">
+        </Form.Group>
+
+        <Button
+          variant="success"
+          type="submit"
+          className="form-contacts__button"
+        >
           Add contact
-        </button>
-      </form>
+        </Button>
+      </Form>
     </div>
   );
 };

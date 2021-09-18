@@ -3,6 +3,7 @@ import avatar from "./avatar.jpg";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserName } from "redux/authorization";
 import { fetchLogOut } from "redux/authorization";
+import { Button } from "react-bootstrap";
 import "./UserMenu.scss";
 
 export const UserMenu = () => {
@@ -11,13 +12,18 @@ export const UserMenu = () => {
 
   return (
     <div className="user-menu">
-      <span>Hi, {userName}</span>
+      <span className="user-menu__text">Hi, {userName}</span>
       <div className="user-menu__box">
         <img className="user-menu__avatar" src={avatar} alt="Аватарка" />
       </div>
-      <button type="button" onClick={() => dispatch(fetchLogOut())}>
+      <Button
+        variant="outline-ligth"
+        size="sm"
+        type="button"
+        onClick={() => dispatch(fetchLogOut())}
+      >
         exit
-      </button>
+      </Button>
     </div>
   );
 };

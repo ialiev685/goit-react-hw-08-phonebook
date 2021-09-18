@@ -1,5 +1,5 @@
-import "./Filter.scss";
-
+// import "./Filter.scss";
+import { InputGroup, FormControl } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getFilter, getFilterItems } from "redux/phonebook";
 
@@ -10,16 +10,19 @@ const Filter = () => {
   const changeFilter = (e) => dispatch(getFilterItems(e.target.value));
 
   return (
-    <label className="filter-input">
-      Поиск:
-      <input
-        className="filter-input__text"
+    <InputGroup className="filter-input mb-3">
+      <InputGroup.Text id="inputGroup"> Поиск:</InputGroup.Text>
+
+      <FormControl
+        autoComplete="off"
+        className="filter-input__text "
         type="text"
         value={filter}
         name="filter"
         onChange={changeFilter}
+        aria-describedby="inputGroup"
       />
-    </label>
+    </InputGroup>
   );
 };
 

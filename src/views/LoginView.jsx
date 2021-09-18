@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLogInUser, getError } from "redux/authorization";
+
+import { Form, Button } from "react-bootstrap";
 import "./viewsStyle.scss";
 
 const LoginView = () => {
@@ -39,10 +41,10 @@ const LoginView = () => {
 
   return (
     <div className="form-user">
-      <form onSubmit={handleSubmit}>
-        <label className="form-user__input">
-          Email
-          <input
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label className="form-user__input">Email</Form.Label>
+          <Form.Control
             autoComplete="off"
             className="form-user__field"
             type="email"
@@ -51,11 +53,10 @@ const LoginView = () => {
             onChange={handleChange}
             required
           />
-        </label>
-
-        <label className="form-user__input">
-          Password
-          <input
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label className="form-user__input">Password</Form.Label>
+          <Form.Control
             autoComplete="off"
             className="form-user__field"
             type="password"
@@ -64,11 +65,12 @@ const LoginView = () => {
             onChange={handleChange}
             required
           />
-        </label>
-        <button type="submit" className="form-user__button">
-          enter
-        </button>
-      </form>
+        </Form.Group>
+
+        <Button variant="primary" type="submit" className="form-user__button">
+          Enter
+        </Button>
+      </Form>
       {error && <p className="form-user__error">{error}</p>}
     </div>
   );

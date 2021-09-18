@@ -3,6 +3,7 @@ import "./viewsStyle.scss";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRegisterUser, getError } from "redux/authorization";
+import { Form, Button } from "react-bootstrap";
 
 const RigisterView = () => {
   const [name, setName] = useState("");
@@ -43,10 +44,10 @@ const RigisterView = () => {
 
   return (
     <div className="form-user">
-      <form onSubmit={handleSubmit}>
-        <label className="form-user__input">
-          Name
-          <input
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicText">
+          <Form.Label className="form-user__input">Name</Form.Label>
+          <Form.Control
             autoComplete="off"
             className="form-user__field"
             type="text"
@@ -55,10 +56,11 @@ const RigisterView = () => {
             onChange={handleChange}
             required
           />
-        </label>
-        <label className="form-user__input">
-          Email
-          <input
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label className="form-user__input">Email</Form.Label>
+          <Form.Control
             autoComplete="off"
             className="form-user__field"
             type="email"
@@ -67,11 +69,10 @@ const RigisterView = () => {
             onChange={handleChange}
             required
           />
-        </label>
-
-        <label className="form-user__input">
-          Password
-          <input
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label className="form-user__input">Password</Form.Label>
+          <Form.Control
             autoComplete="off"
             className="form-user__field"
             type="password"
@@ -80,11 +81,12 @@ const RigisterView = () => {
             onChange={handleChange}
             required
           />
-        </label>
-        <button type="submit" className="form-user__button">
-          register
-        </button>
-      </form>
+        </Form.Group>
+
+        <Button type="submit" className="form-user__button">
+          Register
+        </Button>
+      </Form>
       {error && <p className="form-user__error">{error}</p>}
     </div>
   );
