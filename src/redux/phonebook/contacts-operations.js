@@ -25,7 +25,7 @@ export const fetchCreateContact = createAsyncThunk(
   async (item, { rejectWithValue }) => {
     try {
       const contacts = await API.fetchCreateContact(item);
-      console.log(contacts);
+
       return contacts.data;
     } catch (err) {
       return rejectWithValue(err.message);
@@ -41,6 +41,19 @@ export const fetchDeleteContact = createAsyncThunk(
       if (requestDelete.statusText === "OK") {
         return id;
       }
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
+
+export const fetchUpdateContact = createAsyncThunk(
+  "contacts/fetchUpdateContact",
+  async (item, { rejectWithValue }) => {
+    try {
+      const contacts = await API.fetchUpdateContact(item);
+
+      return contacts.data;
     } catch (err) {
       return rejectWithValue(err.message);
     }

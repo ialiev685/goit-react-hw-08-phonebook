@@ -8,6 +8,7 @@ export {
   fetchContacts,
   fetchCreateContact,
   fetchDeleteContact,
+  fetchUpdateContact,
 } from "./contacts-operations";
 export { getFilterItems } from "./contacts-action";
 

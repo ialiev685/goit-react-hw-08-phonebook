@@ -1,10 +1,10 @@
-// import "./ContactItem.scss";
+import "./ContactItem.scss";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { fetchDeleteContact } from "redux/phonebook/contacts-operations";
-import { ListGroup, Button } from "react-bootstrap";
+import { ListGroup, Button, ButtonGroup } from "react-bootstrap";
 
-const ContactItem = ({ name, number, id }) => {
+const ContactItem = ({ name, number, id, setShowModal }) => {
   const dispatch = useDispatch();
 
   return (
@@ -12,16 +12,26 @@ const ContactItem = ({ name, number, id }) => {
       <span>
         {name}: {number}
       </span>
-      <Button
-        style={{ marginLeft: 20 }}
-        variant="danger"
-        size="sm"
-        className="contacts-list__button "
-        type="button"
-        onClick={() => dispatch(fetchDeleteContact(id))}
-      >
-        delete
-      </Button>
+      <ButtonGroup className="contacts__buttons">
+        <Button
+          variant="warning"
+          size="sm"
+          className="contacts-list__button "
+          type="button"
+          onClick={() => setShowModal({ id, name, number })}
+        >
+          editor
+        </Button>
+        <Button
+          variant="danger"
+          size="sm"
+          className="contacts-list__button "
+          type="button"
+          onClick={() => dispatch(fetchDeleteContact(id))}
+        >
+          delete
+        </Button>
+      </ButtonGroup>
     </ListGroup.Item>
   );
 };

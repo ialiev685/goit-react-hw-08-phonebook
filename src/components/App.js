@@ -1,13 +1,10 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import Container from "./Container";
-
 import { useEffect, lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./App.scss";
 import { Switch } from "react-router-dom";
-
 import { Navigation } from "./Navigation";
 import { fetchCurrentUser, getIsFetchingCurrent } from "redux/authorization";
 import { PrivateRoute } from "./PrivateRoute";

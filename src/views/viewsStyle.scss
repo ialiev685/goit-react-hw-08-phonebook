@@ -1,9 +1,11 @@
-.title {
+.title,
+.caption {
   text-align: center;
 }
 
 .form-user {
-  width: 320px;
+  min-width: 320px;
+  max-width: 425px;
   margin: 30px auto;
 
   &__input {
@@ -11,16 +13,18 @@
     display: block;
   }
 
-  &__field {
-    width: 320px;
-  }
+  // &__field {
+  //   width: 320px;
+  // }
 
   &__error {
-    color: red;
+    margin-top: 10px;
+    // color: red;
   }
 }
 
 .contacts {
-  width: 320px;
+  min-width: 320px;
+  max-width: 425px;
   margin: 0 auto;
 }

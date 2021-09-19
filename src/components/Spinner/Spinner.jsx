@@ -4,7 +4,7 @@ import "./Spinner.scss";
 
 export const Spinner = () => {
   return (
-    <div className="spinner">
+    <div className="spinner mt-6">
       <Loader
         type="Grid"
         color="#00BFFF"

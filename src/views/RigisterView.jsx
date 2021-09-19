@@ -3,7 +3,7 @@ import "./viewsStyle.scss";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRegisterUser, getError } from "redux/authorization";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 
 const RigisterView = () => {
   const [name, setName] = useState("");
@@ -87,7 +87,11 @@ const RigisterView = () => {
           Register
         </Button>
       </Form>
-      {error && <p className="form-user__error">{error}</p>}
+      {error && (
+        <Alert variant="danger" className="form-user__error">
+          {error}
+        </Alert>
+      )}
     </div>
   );
 };

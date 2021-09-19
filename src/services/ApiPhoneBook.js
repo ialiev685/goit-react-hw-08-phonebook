@@ -30,6 +30,10 @@ export const fetchDeleteContact = async (id) => {
   return await axios.delete(`/contacts/${id}`);
 };
 
+export const fetchUpdateContact = async ({ id, name, number }) => {
+  return await axios.patch(`/contacts/${id}`, { name, number });
+};
+
 //запросы авторизации
 
 export const fetchRegisterUser = async (user) => {
@@ -63,6 +67,7 @@ const API = {
   fetchContacts,
   fetchCreateContact,
   fetchDeleteContact,
+  fetchUpdateContact,
   fetchRegisterUser,
   fetchLogInUser,
   fetchLogOut,

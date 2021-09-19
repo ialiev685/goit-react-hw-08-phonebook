@@ -5,31 +5,33 @@ import {
   fetchContacts,
   fetchCreateContact,
   fetchDeleteContact,
+  fetchUpdateContact,
 } from "./contacts-operations";
 
-// const items = createReducer([], {
-//   [actions.fetchSuccess]: (state, action) => [...action.payload, ...state],
-//   [actions.deleteItem]: (state, action) =>
-//     state.filter(({ id }) => id !== action.payload),
-// });
-
 const items = createReducer([], {
-  [fetchContacts.fulfilled]: (state, action) => [...action.payload, ...state],
+  [fetchContacts.fulfilled]: (_, action) => [...action.payload],
   [fetchCreateContact.fulfilled]: (state, action) => [action.payload, ...state],
   [fetchDeleteContact.fulfilled]: (state, action) =>
     state.filter(({ id }) => id !== action.payload),
+  [fetchUpdateContact.fulfilled]: (state, action) => [
+    action.payload,
+    ...state.filter(({ id }) => id !== action.payload.id),
+  ],
 });
 
 const isLoader = createReducer(false, {
+  [fetchUpdateContact.pending]: () => true,
   [fetchDeleteContact.pending]: () => true,
   [fetchContacts.pending]: () => true,
   [fetchCreateContact.pending]: () => true,
+  [fetchUpdateContact.fulfilled]: () => false,
   [fetchDeleteContact.fulfilled]: () => false,
   [fetchContacts.fulfilled]: () => false,
   [fetchCreateContact.fulfilled]: () => false,
   [fetchDeleteContact.rejected]: () => false,
   [fetchContacts.rejected]: () => false,
   [fetchCreateContact.rejected]: () => false,
+  [fetchUpdateContact.rejected]: () => false,
 });
 
 const error = createReducer(null, {
@@ -39,6 +41,8 @@ const error = createReducer(null, {
   [fetchContacts.pending]: () => null,
   [fetchCreateContact.rejected]: (_, action) => action.payload,
   [fetchCreateContact.pending]: () => null,
+  [fetchUpdateContact.rejected]: (_, action) => action.payload,
+  [fetchUpdateContact.pending]: () => null,
 });
 
 const filter = createReducer("", {

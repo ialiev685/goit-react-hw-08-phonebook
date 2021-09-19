@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLogInUser, getError } from "redux/authorization";
 
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 import "./viewsStyle.scss";
 
 const LoginView = () => {
@@ -71,7 +71,11 @@ const LoginView = () => {
           Enter
         </Button>
       </Form>
-      {error && <p className="form-user__error">{error}</p>}
+      {error && (
+        <Alert variant="danger" className="form-user__error">
+          {error}
+        </Alert>
+      )}
     </div>
   );
 };

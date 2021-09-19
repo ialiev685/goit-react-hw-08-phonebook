@@ -17,7 +17,7 @@ export const UserMenu = () => {
         <img className="user-menu__avatar" src={avatar} alt="Аватарка" />
       </div>
       <Button
-        variant="outline-ligth"
+        variant="outline-light"
         size="sm"
         type="button"
         onClick={() => dispatch(fetchLogOut())}
